@@ -1,3 +1,81 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "plugins": ["eslint-plugin-simple-import-sort", "unused-imports"],
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/jsx-first-prop-new-line": "error",
+    "eol-last": "error",
+    "semi": ["error", "always"],
+    "no-unused-vars": [
+      "warn",
+      { "vars": "all", "args": "none", "ignoreRestSiblings": false }
+    ],
+    "unused-imports/no-unused-imports-ts": ["warn"],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+
+    "import/order": [
+      "warn",
+      {
+        "groups": ["external", ["internal", "type"], "builtin", "unknown"],
+        "pathGroups": [
+          //외부 모듈
+          {
+            "pattern": "react*",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "next*",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "next/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "styled*",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "moment*",
+            "group": "external",
+            "position": "before"
+          },
+
+          //내부
+          { "pattern": "data/**", "group": "internal", "position": "before" },
+          { "pattern": "hooks/**", "group": "internal", "position": "before" },
+          { "pattern": "store/**", "group": "internal", "position": "before" },
+          { "pattern": "public/**", "group": "internal", "position": "before" },
+          { "pattern": "styles/**", "group": "internal", "position": "before" },
+          { "pattern": "pages/**", "group": "internal", "position": "before" },
+          //타입
+          { "pattern": "types/**", "group": "type", "position": "before" },
+
+          //컴포넌트
+          {
+            "pattern": "components/**",
+            "group": "builtin"
+          }
+        ],
+
+        "pathGroupsExcludedImportTypes": ["@tanstack*"],
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
+  }
 }
